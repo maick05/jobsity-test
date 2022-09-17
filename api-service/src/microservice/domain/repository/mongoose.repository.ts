@@ -12,7 +12,7 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
 
   constructor(protected model: Model<MongooseModel>) {}
 
-  async insertOne(item: Collection, name: string): Promise<ObjectId> {
+  async insertOne(item: Partial<Collection>, name: string): Promise<ObjectId> {
     return this.create(item).then(
       (savedDoc: MongooseDocument) => {
         this.logger.log(
@@ -28,7 +28,7 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
     );
   }
 
-  async create(document: Collection): Promise<MongooseDocument> {
+  async create(document: Partial<Collection>): Promise<MongooseDocument> {
     return new Promise(async (resolve, reject) => {
       this.model.create(document, function (err, savedDoc) {
         if (err) reject(err);
