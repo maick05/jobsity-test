@@ -29,7 +29,7 @@ export class RegisterUserService extends AbstractAuthService {
   private async validateUser(userDTO: CreateUserDTO): Promise<void> {
     this.logger.log('Validating user...');
     DTO.ValidateIsAnyEmptyKey(userDTO);
-    await this.validateUserService.validateUserExistsDB(userDTO);
+    await this.validateUserService.validateUserAlreadyExistsDB(userDTO);
   }
 
   private async createUserDB(userDTO: CreateUserDTO): Promise<User> {

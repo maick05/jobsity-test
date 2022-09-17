@@ -8,12 +8,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './adapter/module/users.module';
 import { ConfigurationModule } from './adapter/module/configuration.module';
 import { StockModule } from './adapter/module/stock.module';
+import { SecurityModule } from './adapter/module/security.module';
 
 @Module({
   imports: [
     ConfigurationModule,
     UsersModule,
     StockModule,
+    SecurityModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

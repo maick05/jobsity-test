@@ -1,3 +1,4 @@
+import { DateHelper } from './../../../adapter/helper/date.helper';
 import { StockHistoryMongooseRepository } from './../../../adapter/repository/history.repository';
 import { Injectable } from '@nestjs/common';
 import { AbstractService } from '../abstract.service';
@@ -15,7 +16,7 @@ export class LogHistoryService extends AbstractService {
   async logHistory(stock: Stock, userEmail: string): Promise<void> {
     const log = new StockHistory();
     log.userEmail = userEmail;
-    log.date = new Date();
+    log.date = DateHelper.GetServerDateNow();
     log.name = stock.name;
     log.symbol = stock.symbol;
     log.high = stock.high;

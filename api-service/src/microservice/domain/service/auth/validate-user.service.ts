@@ -1,3 +1,4 @@
+import { NotFoundException } from './../../../../core/error-handling/exception/not-found.exception';
 import { InvalidCredentialsException } from '../../../../core/error-handling/exception/invalid-credentials.exception';
 import { UserAlreadyExistsException } from '../../../../core/error-handling/exception/user-already-exists.exception';
 import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
@@ -12,7 +13,7 @@ export class ValidateUserService extends AbstractAuthService {
     super(userRepository);
   }
 
-  async validateUserExistsDB(userDTO: CreateUserDTO): Promise<User> {
+  async validateUserAlreadyExistsDB(userDTO: CreateUserDTO): Promise<User> {
     const res = await this.getUserByEmail(userDTO.email);
     if (res) throw new UserAlreadyExistsException(userDTO.email);
 
@@ -35,5 +36,11 @@ export class ValidateUserService extends AbstractAuthService {
     passwordDB: string
   ): boolean {
     return bcrypt.compareSync(password, passwordDB);
+  }
+
+  async validateIfUserExistsDB(email: string): Promise<User> {
+    const res = await this.getUserByEmail(email);
+    if (!res) throw new NotFoundException(`User with '${email}'`);
+    return res;
   }
 }

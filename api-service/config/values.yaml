@@ -6,5 +6,11 @@ database:
 auth:
   jwt:
     secret: 6722cc2e2885f49bab3b183bd4578774
+email:
+  host: smtp.hostinger.com
+  port: 465
+  secure: true
+  sender: jobsity.challenge@devseeder.com
+  password: jobSity#challenge01
 api:
   port: 3001
