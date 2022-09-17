@@ -27,7 +27,7 @@ async function buildSwagger(app: INestApplication): Promise<void> {
   const docApi = new DocumentBuilder()
     .addBasicAuth()
     .addBearerAuth()
-    .setTitle('JobSity Challenge')
+    .setTitle('JobSity Challenge - API Service')
     .setDescription('JobSity Challenge - Maick Speck')
     .setVersion('1.0.0')
     .build();
