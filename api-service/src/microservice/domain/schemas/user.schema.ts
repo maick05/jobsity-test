@@ -6,7 +6,7 @@ export type UserDocument = User & Document;
 
 @Schema({ timestamps: true })
 export class User {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   email: string;
 
   @Prop({ required: true, type: String })
@@ -14,4 +14,5 @@ export class User {
 }
 
 const schema = SchemaFactory.createForClass(User);
+schema.index({ email: 1, role: 1 }, { unique: true });
 export const UserSchema = schema;

@@ -11,21 +11,35 @@ export class UsersService {
     private readonly jwtTokenService: JwtService,
     private configService: ConfigService
   ) {}
+
   async register(userDTO: User): Promise<TokenResponse> {
-    await this.userRepository.insertOne(userDTO, 'User');
+    const userDb = await this.validateEmailDB(userDTO);
+
+    if (!userDb) await this.userRepository.insertOne(userDTO, 'User');
+
     return {
+      email: userDTO.email,
       token: await this.signToken(userDTO)
     };
   }
 
-  async signToken(userDTO: User): Promise<string> {
+  private async signToken(userDTO: User): Promise<string> {
     const payload = { email: userDTO.email, role: userDTO.role };
     return this.jwtTokenService.sign(payload, {
       secret: await this.configService.get('auth.jwt.secret')
     });
   }
+
+  async validateEmailDB(userDTO: User): Promise<boolean> {
+    const res = await this.userRepository.findOne({
+      email: userDTO.email,
+      role: userDTO.role
+    });
+    return res;
+  }
 }
 
 export interface TokenResponse {
+  email: string;
   token: string;
 }

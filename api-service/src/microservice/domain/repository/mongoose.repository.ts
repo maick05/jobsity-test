@@ -1,4 +1,5 @@
-import { Logger } from '@nestjs/common';
+import { CustomErrorException } from './../../../core/error-handling/exception/custom-error.exception';
+import { HttpStatus, Logger } from '@nestjs/common';
 import { HydratedDocument, Model, ObjectId } from 'mongoose';
 import { MongoError } from 'mongodb';
 import { getModelToken } from '@nestjs/mongoose';
@@ -23,7 +24,10 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
       },
       (err: MongoError) => {
         this.logger.error(err.message);
-        throw new Error(err.message);
+        throw new CustomErrorException(
+          `Error creating ${name}: ${err.message}`,
+          HttpStatus.BAD_REQUEST
+        );
       }
     );
   }
@@ -50,29 +54,6 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
     return this.model.findById(id).select(select).lean().exec();
   }
 
-  async updateOneById(id: MongooseDocumentID, data: any): Promise<void> {
-    const res = await this.updateOne({ _id: id }, data);
-    this.logger.log(
-      `${getModelToken(this.model.name)} ${id} - Succesfully updated!.`
-    );
-    return res;
-  }
-
-  async updateOne(query: any, data: any, pushData = {}): Promise<void> {
-    this.model.findOneAndUpdate(
-      query,
-      { $set: data, ...pushData },
-      { upsert: false },
-      function (err: MongoError) {
-        if (err) throw new Error(err.message);
-      }
-    );
-  }
-
-  async deleteOneById(id: string | number): Promise<void> {
-    await this.model.deleteOne({ id });
-  }
-
   async find(
     searchParams: any,
     select: any = {},
@@ -81,6 +62,21 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
     if (Object.keys(select).length === 0) select = { _id: 0 };
 
     let res = this.model.find(searchParams);
+
+    if (typeof sort === 'object' && Object.keys(sort).length > 0)
+      res = res.sort(sort);
+
+    return res.select(select).lean().exec();
+  }
+
+  async findOne(
+    searchParams: any,
+    select: any = {},
+    sort: any = {}
+  ): Promise<any> {
+    if (Object.keys(select).length === 0) select = { _id: 0 };
+
+    let res = this.model.findOne(searchParams);
 
     if (typeof sort === 'object' && Object.keys(sort).length > 0)
       res = res.sort(sort);
