@@ -3,7 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { AppModule } from './microservice/app.module';
 import { useContainer } from 'class-validator';
-import { ValidationPipe } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as fs from 'fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,7 +17,24 @@ async function bootstrap() {
 
   app.useGlobalFilters(new CustomErrorExceptionFilter(adapterHost));
 
+  await buildSwagger(app);
+
   const configService = app.get<ConfigService>(ConfigService);
   await app.listen(configService.get<number>('api.port'));
 }
+
+async function buildSwagger(app: INestApplication): Promise<void> {
+  const docApi = new DocumentBuilder()
+    .addBasicAuth()
+    .addBearerAuth()
+    .setTitle('JobSity Challenge')
+    .setDescription('JobSity Challenge - Maick Speck')
+    .setVersion('1.0.0')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, docApi);
+  fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
+  SwaggerModule.setup('api', app, document);
+}
+
 bootstrap();

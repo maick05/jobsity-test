@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '../../schema/user.schema';
 import { AbstractAuthService } from './abstract-auth.service';
 import { LoginUserDTO } from '../../model/dto/login-user.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Injectable()
 export class LoginService extends AbstractAuthService {
@@ -31,6 +32,11 @@ export class LoginService extends AbstractAuthService {
   }
 }
 
-export interface TokenResponse {
+export class TokenResponse {
+  @ApiProperty({
+    type: String,
+    description: `JWT Token`,
+    example: 'any_jwt_token'
+  })
   token: string;
 }

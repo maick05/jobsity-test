@@ -6,6 +6,7 @@ import { AbstractAuthService } from './abstract-auth.service';
 import { CreateUserDTO } from '../../model/dto/create-user.dto';
 import { DTO } from '../../model/dto/dto.model';
 import { GeneratePasswordService } from './generate-password.service';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Injectable()
 export class RegisterUserService extends AbstractAuthService {
@@ -45,7 +46,18 @@ export class RegisterUserService extends AbstractAuthService {
   }
 }
 
-export interface UserResponse {
+export class UserResponse {
+  @ApiProperty({
+    type: String,
+    description: `User email`,
+    example: 'jobsity@email.com'
+  })
   email: string;
+
+  @ApiProperty({
+    type: String,
+    description: `User password`,
+    example: 'any_password'
+  })
   password: string;
 }
