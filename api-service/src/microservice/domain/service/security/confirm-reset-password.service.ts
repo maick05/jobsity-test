@@ -8,6 +8,7 @@ import { AbstractService } from '../abstract.service';
 import { MailService } from '../mail/mail.service';
 import { ConfirmResetPasswordDTO } from '../../model/dto/confirm-reset-password.dto';
 import { GeneratePasswordService } from '../auth/generate-password.service';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Injectable()
 export class ConfirmResetPasswordService extends AbstractService {
@@ -22,7 +23,7 @@ export class ConfirmResetPasswordService extends AbstractService {
 
   async confirmResetPassword(
     confirmDTO: ConfirmResetPasswordDTO
-  ): Promise<CustomResponse & { password }> {
+  ): Promise<PasswordResetedResponse> {
     await this.validateUserService.validateIfUserExistsDB(confirmDTO.email);
 
     await this.validateSecurityCode(confirmDTO);
@@ -53,4 +54,13 @@ export class ConfirmResetPasswordService extends AbstractService {
     if (tokenDB.expireDate < DateHelper.GetServerDateNow())
       throw new InvalidSecurityCodeException('Security Token Expired!');
   }
+}
+
+export class PasswordResetedResponse extends CustomResponse {
+  @ApiProperty({
+    type: String,
+    description: `New Generated Password`,
+    example: 'new_password'
+  })
+  password: string;
 }

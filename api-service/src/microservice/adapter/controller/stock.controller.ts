@@ -9,7 +9,18 @@ import { GetStockService } from '../../domain/service/stock/get-stock.service';
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { Role } from '../../domain/decorator/role.decorator';
 import { GetHistoryService } from '../../domain/service/stock/get-history.service';
+import {
+  ApiBearerAuth,
+  ApiForbiddenResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+  ApiUnauthorizedResponse
+} from '@nestjs/swagger';
 
+@ApiTags('stock')
+@ApiBearerAuth()
 @Controller()
 export class StockController {
   constructor(
@@ -18,6 +29,18 @@ export class StockController {
     private readonly getStatsService: GetStatsService
   ) {}
 
+  @ApiOkResponse({
+    description: 'Stock Response returned!',
+    isArray: false,
+    type: Stock
+  })
+  @ApiNotFoundResponse({
+    description: 'Stock not found!'
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized'
+  })
+  @ApiQuery({ name: 'q', description: 'Stock Quote', example: 'AAPL.US' })
   @Role(EnumUserRole.USER)
   @UseGuards(CustomJwtAuthGuard)
   @Get('/stock')
@@ -28,6 +51,14 @@ export class StockController {
     return this.getStockService.getStock(stock, userEmail);
   }
 
+  @ApiOkResponse({
+    description: 'Stock History Response returned!',
+    isArray: true,
+    type: StockHistory
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized'
+  })
   @Role(EnumUserRole.USER)
   @UseGuards(CustomJwtAuthGuard)
   @Get('/history')
@@ -35,6 +66,17 @@ export class StockController {
     return this.getStockHistoryService.getHistory(userEmail);
   }
 
+  @ApiOkResponse({
+    description: 'Stats Response returned!',
+    isArray: true,
+    type: Stat
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized'
+  })
+  @ApiForbiddenResponse({
+    description: 'Forbidden Resource, only the permited role can do it.'
+  })
   @Role(EnumUserRole.ADMIN)
   @UseGuards(CustomJwtAuthGuard)
   @Get('/stats')
