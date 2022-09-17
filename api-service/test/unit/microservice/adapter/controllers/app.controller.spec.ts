@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from '../../../../../src/microservice/adapter/controllers/users.controller';
-import { UsersService } from '../../../../../src/microservice/domain/services/users.service';
+import { LoginService } from '../../../../../src/microservice/domain/services/auth/login.service';
 
 describe('AppController', () => {
   let appController: UsersController;
@@ -8,7 +8,7 @@ describe('AppController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService]
+      providers: [LoginService]
     }).compile();
 
     appController = app.get<UsersController>(UsersController);

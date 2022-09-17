@@ -1,8 +1,7 @@
-import { CustomErrorException } from './../../../core/error-handling/exception/custom-error.exception';
-import { HttpStatus, Logger } from '@nestjs/common';
+import { MongoDBException } from './../../../core/error-handling/exception/mongodb.exception';
+import { Logger } from '@nestjs/common';
 import { HydratedDocument, Model, ObjectId } from 'mongoose';
 import { MongoError } from 'mongodb';
-import { getModelToken } from '@nestjs/mongoose';
 
 type MongooseDocument = HydratedDocument<any>;
 
@@ -24,10 +23,7 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
       },
       (err: MongoError) => {
         this.logger.error(err.message);
-        throw new CustomErrorException(
-          `Error creating ${name}: ${err.message}`,
-          HttpStatus.BAD_REQUEST
-        );
+        throw new MongoDBException(`Error creating ${name}: ${err.message}`);
       }
     );
   }

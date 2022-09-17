@@ -1,13 +1,13 @@
-import { User } from './../../domain/schemas/user.schema';
+import { UserDTO } from './../../domain/model/user.dto';
+import { RegisterUserService } from './../../domain/services/auth/register-user.service';
 import { Body, Controller, Post } from '@nestjs/common';
-import { UsersService } from '../../domain/services/users.service';
 
 @Controller()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly registerUserService: RegisterUserService) {}
 
   @Post('/register')
-  async register(@Body() user: User) {
-    return this.usersService.register(user);
+  async register(@Body() user: UserDTO) {
+    return this.registerUserService.register(user);
   }
 }

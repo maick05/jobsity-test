@@ -1,5 +1,6 @@
+import { RegisterUserService } from './../../domain/services/auth/register-user.service';
 import { User, UserSchema } from './../../domain/schemas/user.schema';
-import { UsersService } from './../../domain/services/users.service';
+import { LoginService } from '../../domain/services/auth/login.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth.module';
@@ -14,7 +15,7 @@ import { UsersMongooseRepository } from '../repository/user.repository';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
   ],
   controllers: [UsersController],
-  providers: [UsersService, UsersMongooseRepository],
-  exports: []
+  providers: [RegisterUserService, LoginService, UsersMongooseRepository],
+  exports: [RegisterUserService, LoginService]
 })
 export class UsersModule {}
