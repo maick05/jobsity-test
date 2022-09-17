@@ -1,18 +1,18 @@
 import { ValidateUserService } from './validate-user.service';
 import { User } from '../../schema/user.schema';
-import { RandomHelper } from '../../../adapter/helper/random.helper';
 import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
 import { Injectable } from '@nestjs/common';
 import { AbstractAuthService } from './abstract-auth.service';
 import { CreateUserDTO } from '../../model/dto/create-user.dto';
-import { EnumBufferEncoding } from '../../enum/buffer-encoding.enum';
 import { DTO } from '../../model/dto/dto.model';
+import { GeneratePasswordService } from './generate-password.service';
 
 @Injectable()
 export class RegisterUserService extends AbstractAuthService {
   constructor(
     protected readonly userRepository: UsersMongooseRepository,
-    protected readonly validateUserService: ValidateUserService
+    protected readonly validateUserService: ValidateUserService,
+    protected readonly generatePasswordService: GeneratePasswordService
   ) {
     super(userRepository);
   }
@@ -35,17 +35,13 @@ export class RegisterUserService extends AbstractAuthService {
   private async createUserDB(userDTO: CreateUserDTO): Promise<User> {
     this.logger.log('Creating user in database...');
 
-    const password = RandomHelper.GenerateHashString(
-      16,
-      EnumBufferEncoding.HEX
-    );
-
     const user = new User();
     user.email = userDTO.email;
     user.role = userDTO.role;
-    user.password = this.generateUserHash(password);
+    const userPassword = this.generatePasswordService.generateUserPassword();
+    user.password = userPassword.hashPassword;
     await this.userRepository.insertOne(user, 'User');
-    return { ...user, password };
+    return { ...user, password: userPassword.password };
   }
 }
 

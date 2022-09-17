@@ -31,4 +31,8 @@ export class SecurityTokenMongooseRepository extends MongooseRepository<
       }
     );
   }
+
+  async getActiveCode(email: string): Promise<SecurityToken> {
+    return this.findOne({ userEmail: email, active: true });
+  }
 }

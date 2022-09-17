@@ -1,5 +1,5 @@
-import { DateHelper } from './../../../adapter/helper/date.helper';
-import { CustomResponse } from './../../../../core/interface/custom-response.interface';
+import { DateHelper } from '../../../adapter/helper/date.helper';
+import { CustomResponse } from '../../../../core/interface/custom-response.interface';
 import { ValidateUserService } from '../auth/validate-user.service';
 import { RandomHelper } from '../../../adapter/helper/random.helper';
 import { SecurityTokenMongooseRepository } from '../../../adapter/repository/security-token.repository';
@@ -9,7 +9,7 @@ import { MailService } from '../mail/mail.service';
 import { SecurityToken } from '../../schema/security-tokens.schema';
 
 @Injectable()
-export class ResetPasswordService extends AbstractService {
+export class RequestResetPasswordService extends AbstractService {
   constructor(
     protected readonly securityTokenRepository: SecurityTokenMongooseRepository,
     protected readonly mailService: MailService,

@@ -1,9 +1,10 @@
+import { ConfirmResetPasswordService } from './../../domain/service/security/confirm-reset-password.service';
 import { UsersModule } from './users.module';
 import {
   SecurityToken,
   SecurityTokenSchema
 } from './../../domain/schema/security-tokens.schema';
-import { ResetPasswordService } from './../../domain/service/security/reset-password.service';
+import { RequestResetPasswordService } from '../../domain/service/security/request-reset-password.service';
 import { MailModule } from './mail.module';
 import { Module } from '@nestjs/common';
 import { SecurityController } from '../controller/security.controller';
@@ -19,7 +20,11 @@ import { MongooseModule } from '@nestjs/mongoose';
     ])
   ],
   controllers: [SecurityController],
-  providers: [ResetPasswordService, SecurityTokenMongooseRepository],
+  providers: [
+    RequestResetPasswordService,
+    SecurityTokenMongooseRepository,
+    ConfirmResetPasswordService
+  ],
   exports: []
 })
 export class SecurityModule {}

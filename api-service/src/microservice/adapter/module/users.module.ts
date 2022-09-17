@@ -8,6 +8,7 @@ import { AuthModule } from './auth.module';
 import { AuthController } from '../controller/auth.controller';
 import { ConfigurationModule } from './configuration.module';
 import { UsersMongooseRepository } from '../repository/user.repository';
+import { GeneratePasswordService } from '../../domain/service/auth/generate-password.service';
 
 @Module({
   imports: [
@@ -20,8 +21,14 @@ import { UsersMongooseRepository } from '../repository/user.repository';
     RegisterUserService,
     LoginService,
     ValidateUserService,
+    GeneratePasswordService,
     UsersMongooseRepository
   ],
-  exports: [RegisterUserService, LoginService, ValidateUserService]
+  exports: [
+    RegisterUserService,
+    LoginService,
+    ValidateUserService,
+    GeneratePasswordService
+  ]
 })
 export class UsersModule {}

@@ -15,4 +15,8 @@ export class UsersMongooseRepository extends MongooseRepository<
   ) {
     super(model);
   }
+
+  async updatePassword(email: string, password: string) {
+    await this.model.updateOne({ email }, { $set: { password } });
+  }
 }
