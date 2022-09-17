@@ -1,4 +1,4 @@
-import { JWTPayload } from './../../../core/auth/jwt/jwt-payload.interface';
+import { JWTPayload } from '../../../core/auth/jwt/jwt-payload.interface';
 export class AuthenticatorExtractorHelper {
   static ExtractBasicAuth(authStr: string) {
     const b64auth = (authStr || '').split(' ')[1] || '';

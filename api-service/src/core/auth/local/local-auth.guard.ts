@@ -1,5 +1,5 @@
-import { ValidateUserService } from './../../../microservice/domain/services/auth/validate-user.service';
-import { AuthenticatorExtractorHelper } from './../../../microservice/adapter/helper/authenticator-extractor.helper';
+import { ValidateUserService } from '../../../microservice/domain/service/auth/validate-user.service';
+import { AuthenticatorExtractorHelper } from '../../../microservice/adapter/helper/authenticator-extractor.helper';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { AbstractGuard } from '../guard/abstract-guard.guard';
 

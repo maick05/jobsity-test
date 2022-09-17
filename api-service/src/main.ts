@@ -1,4 +1,4 @@
-import { CustomErrorExceptionFilter } from './core/error-handling/filters/custom-error-exception.filter';
+import { CustomErrorExceptionFilter } from './core/error-handling/filter/custom-error-exception.filter';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { AppModule } from './microservice/app.module';

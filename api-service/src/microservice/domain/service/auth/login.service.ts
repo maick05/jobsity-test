@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
 import { Injectable } from '@nestjs/common';
-import { User } from '../../schemas/user.schema';
+import { User } from '../../schema/user.schema';
 import { AbstractAuthService } from './abstract-auth.service';
 import { LoginUserDTO } from '../../model/dto/login-user.dto';
 

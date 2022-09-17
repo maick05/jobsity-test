@@ -1,6 +1,6 @@
-import { UsersMongooseRepository } from './../../../adapter/repository/user.repository';
+import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
 import { AbstractService } from '../abstract.service';
-import { User } from '../../schemas/user.schema';
+import { User } from '../../schema/user.schema';
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 

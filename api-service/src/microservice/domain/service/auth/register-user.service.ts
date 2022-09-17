@@ -1,6 +1,6 @@
 import { ValidateUserService } from './validate-user.service';
-import { User } from './../../schemas/user.schema';
-import { RandomHelper } from './../../../adapter/helper/random.helper';
+import { User } from '../../schema/user.schema';
+import { RandomHelper } from '../../../adapter/helper/random.helper';
 import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
 import { Injectable } from '@nestjs/common';
 import { AbstractAuthService } from './abstract-auth.service';

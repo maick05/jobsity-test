@@ -1,7 +1,7 @@
 import { InvalidCredentialsException } from '../../../../core/error-handling/exception/invalid-credentials.exception';
-import { UserAlreadyExistsException } from './../../../../core/error-handling/exception/user-already-exists.exception';
-import { UsersMongooseRepository } from './../../../adapter/repository/user.repository';
-import { User } from '../../schemas/user.schema';
+import { UserAlreadyExistsException } from '../../../../core/error-handling/exception/user-already-exists.exception';
+import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
+import { User } from '../../schema/user.schema';
 import { CreateUserDTO } from '../../model/dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { AbstractAuthService } from './abstract-auth.service';

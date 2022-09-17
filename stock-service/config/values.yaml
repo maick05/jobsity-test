@@ -1,0 +1,4 @@
+external-api:
+  url: https://stooq.com/q/l/?f=sd2t2ohlcvn&h&e=json
+api:
+  port: 3002

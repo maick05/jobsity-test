@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from '../../../../../src/microservice/adapter/controllers/auth.controller';
-import { LoginService } from '../../../../../src/microservice/domain/services/auth/login.service';
+import { AuthController } from '../../../../../src/microservice/adapter/controller/auth.controller';
+import { LoginService } from '../../../../../src/microservice/domain/service/auth/login.service';
 
 describe('AppController', () => {
   let appController: AuthController;
