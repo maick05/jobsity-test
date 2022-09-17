@@ -31,12 +31,17 @@ export class RegisterUserService extends AbstractAuthService {
   private async createUserDB(userDTO: UserDTO): Promise<User> {
     this.logger.log('Creating user in database...');
 
+    const password = RandomHelper.GenerateHashString(
+      16,
+      EnumBufferEncoding.HEX
+    );
+
     const user = new User();
     user.email = userDTO.email;
     user.role = userDTO.role;
-    user.password = RandomHelper.GenerateHashString(16, EnumBufferEncoding.HEX);
+    user.password = this.generateUserHash(password);
     await this.userRepository.insertOne(user, 'User');
-    return user;
+    return { ...user, password };
   }
 }
 
