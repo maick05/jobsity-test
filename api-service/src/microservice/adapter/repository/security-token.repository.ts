@@ -18,4 +18,17 @@ export class SecurityTokenMongooseRepository extends MongooseRepository<
   ) {
     super(model);
   }
+
+  async inactiveActualTokens(email: string): Promise<void> {
+    await this.model.updateMany(
+      {
+        userEmail: email
+      },
+      {
+        $set: {
+          active: false
+        }
+      }
+    );
+  }
 }

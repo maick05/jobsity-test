@@ -41,6 +41,8 @@ export class ResetPasswordService extends AbstractService {
   }
 
   async generateToken(email: string, code: number): Promise<void> {
+    await this.securityTokenRepository.inactiveActualTokens(email);
+
     const token = new SecurityToken();
     token.active = true;
     token.userEmail = email;
