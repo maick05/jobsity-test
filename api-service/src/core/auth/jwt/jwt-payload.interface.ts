@@ -1,4 +1,4 @@
 export interface JWTPayload {
-  username: string;
-  scopes: string[];
+  email: string;
+  role: string;
 }

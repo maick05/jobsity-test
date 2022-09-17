@@ -1,8 +1,10 @@
+stock-api:
+  url: 'http://localhost:3002'
 database:
   mongodb:
     connection: 'mongodb+srv://lab-tests-root:J8d2IpJF3j9XmpkO@labs.dnrkl78.mongodb.net/jobsity?retryWrites=true&w=majority'
-api:
-  port: 3001
 auth:
   jwt:
     secret: 6722cc2e2885f49bab3b183bd4578774
+api:
+  port: 3001

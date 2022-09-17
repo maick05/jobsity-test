@@ -1,3 +1,4 @@
+import { MongooseHelper } from './../../adapter/helper/mongoose.helper';
 import { MongoDBException } from './../../../core/error-handling/exception/mongodb.exception';
 import { Logger } from '@nestjs/common';
 import { HydratedDocument, Model, ObjectId } from 'mongoose';
@@ -37,19 +38,6 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
     });
   }
 
-  async findAll(select: object = {}): Promise<any[]> {
-    if (Object.keys(select).length === 0) select = { _id: 0 };
-    return this.model.find({}).select(select).lean().exec();
-  }
-
-  async findById(
-    id: MongooseDocumentID,
-    select: object = {}
-  ): Promise<MongooseDocument> {
-    if (Object.keys(select).length === 0) select = { _id: 0 };
-    return this.model.findById(id).select(select).lean().exec();
-  }
-
   async find(
     searchParams: any,
     select: any = {},
@@ -78,5 +66,20 @@ export abstract class MongooseRepository<Collection, MongooseModel> {
       res = res.sort(sort);
 
     return res.select(select).lean().exec();
+  }
+
+  async groupBy(group, match = {}, select = {}): Promise<any[]> {
+    const aggregateParams = [];
+
+    if (Object.keys(match).length > 0) aggregateParams.push({ $match: match });
+
+    aggregateParams.push({
+      $group: {
+        _id: group,
+        count: { $sum: 1 },
+        ...MongooseHelper.buildSelectAggregated(select)
+      }
+    });
+    return this.model.aggregate(aggregateParams);
   }
 }
