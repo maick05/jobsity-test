@@ -1,0 +1,8 @@
+database:
+  mongodb:
+    connection: 'mongodb+srv://lab-tests-root:J8d2IpJF3j9XmpkO@labs.dnrkl78.mongodb.net/?retryWrites=true&w=majority/jobsity'
+auth:
+  jwt:
+    secret: ${JWT_SECRET}
+api:
+  port: ${API_PORT}

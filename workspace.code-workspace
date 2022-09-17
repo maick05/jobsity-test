@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "api-service"
+		},
+		{
+			"path": "stock-service"
+		}
+	],
+	"settings": {}
+}
