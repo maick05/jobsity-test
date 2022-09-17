@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { EnumUserRole } from '../enum/user-role.enum';
+import { EnumUserRole } from '../../enum/user-role.enum';
 
-export class UserDTO {
+export class CreateUserDTO {
   @IsNotEmpty()
   @IsString()
   @IsEmail()

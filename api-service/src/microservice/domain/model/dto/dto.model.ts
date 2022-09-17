@@ -1,4 +1,4 @@
-import { EmptyPropException } from '../../../core/error-handling/exception/empty-prop.exception';
+import { EmptyPropException } from '../../../../core/error-handling/exception/empty-prop.exception';
 
 export class DTO {
   static ValidateIsAnyEmptyKey(obj) {

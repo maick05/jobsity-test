@@ -4,6 +4,7 @@ import { UsersMongooseRepository } from '../../../adapter/repository/user.reposi
 import { Injectable } from '@nestjs/common';
 import { User } from '../../schemas/user.schema';
 import { AbstractAuthService } from './abstract-auth.service';
+import { LoginUserDTO } from '../../model/dto/login-user.dto';
 
 @Injectable()
 export class LoginService extends AbstractAuthService {
@@ -15,9 +16,10 @@ export class LoginService extends AbstractAuthService {
     super(userRepository);
   }
 
-  async login(user: User): Promise<TokenResponse> {
+  async login(user: LoginUserDTO): Promise<TokenResponse> {
+    const userDB = await this.getUserByEmail(user.email);
     return {
-      token: await this.signToken(user)
+      token: await this.signToken(userDB)
     };
   }
 
