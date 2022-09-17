@@ -38,7 +38,7 @@ export class StockController {
   @Role(EnumUserRole.ADMIN)
   @UseGuards(CustomJwtAuthGuard)
   @Get('/stats')
-  async getStats(): Promise<any[]> {
+  async getStats(): Promise<Stat[]> {
     return this.getStatsService.getStats();
   }
 }
