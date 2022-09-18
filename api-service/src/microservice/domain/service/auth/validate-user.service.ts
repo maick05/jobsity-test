@@ -13,11 +13,9 @@ export class ValidateUserService extends AbstractAuthService {
     super(userRepository);
   }
 
-  async validateUserAlreadyExistsDB(userDTO: CreateUserDTO): Promise<User> {
+  async validateUserAlreadyExistsDB(userDTO: CreateUserDTO): Promise<void> {
     const res = await this.getUserByEmail(userDTO.email);
     if (res) throw new UserAlreadyExistsException(userDTO.email);
-
-    return res;
   }
 
   async validateUserByCredentials(userDTO: LoginUserDTO): Promise<User> {
