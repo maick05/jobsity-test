@@ -9,7 +9,7 @@ import { AuthModule } from './auth.module';
 import { ConfigurationModule } from './configuration.module';
 import { StockController } from '../controller/stock.controller';
 import { HttpModule } from '@nestjs/axios';
-import { StockHistoryMongooseRepository } from '../repository/history.repository';
+import { StockHistoryMongooseRepository } from '../repository/stock-history.repository';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GetHistoryService } from '../../domain/service/stock/get-history.service';
 import { GetStatsService } from '../../domain/service/stock/get-stats.service';

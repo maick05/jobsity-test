@@ -1,4 +1,4 @@
-import { Stat } from './../../domain/model/stat.model';
+import { Stat } from '../../domain/model/stat.model';
 import {
   StockHistory,
   StockHistoryDocument

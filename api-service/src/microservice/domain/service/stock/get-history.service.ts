@@ -1,4 +1,4 @@
-import { StockHistoryMongooseRepository } from '../../../adapter/repository/history.repository';
+import { StockHistoryMongooseRepository } from '../../../adapter/repository/stock-history.repository';
 import { Injectable } from '@nestjs/common';
 import { AbstractService } from '../abstract.service';
 import { StockHistory } from '../../schema/stock-history.schema';

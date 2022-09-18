@@ -1,6 +1,6 @@
-import { mockHistoryStock } from './../../../../../mock/model/history.mock';
+import { mockHistoryStockArray } from './../../../../../mock/model/history.mock';
 import { mockStockHistoryRepository } from '../../../../../mock/repository/repository.mock';
-import { StockHistoryMongooseRepository } from '../../../../../../src/microservice/adapter/repository/history.repository';
+import { StockHistoryMongooseRepository } from '../../../../../../src/microservice/adapter/repository/stock-history.repository';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as sinon from 'sinon';
 import { GetHistoryService } from '../../../../../../src/microservice/domain/service/stock/get-history.service';
@@ -28,11 +28,11 @@ describe('GetHistoryService', () => {
     it('Should call getHistory and return an array', async () => {
       const getStub = sinon
         .stub(mockStockHistoryRepository, 'find')
-        .returns(mockHistoryStock());
+        .returns(mockHistoryStockArray());
 
       const actual = await sut.getHistory('any_email');
 
-      expect(actual).to.be.deep.equal(mockHistoryStock());
+      expect(actual).to.be.deep.equal(mockHistoryStockArray());
 
       getStub.restore();
     });

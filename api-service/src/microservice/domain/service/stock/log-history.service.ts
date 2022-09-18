@@ -1,5 +1,5 @@
 import { DateHelper } from './../../../adapter/helper/date.helper';
-import { StockHistoryMongooseRepository } from './../../../adapter/repository/history.repository';
+import { StockHistoryMongooseRepository } from '../../../adapter/repository/stock-history.repository';
 import { Injectable } from '@nestjs/common';
 import { AbstractService } from '../abstract.service';
 import { Stock } from '../../model/stock.model';

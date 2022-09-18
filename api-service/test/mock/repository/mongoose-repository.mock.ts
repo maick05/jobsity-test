@@ -1,4 +1,4 @@
-export const mockModelMongoose = {
+export const mockMongooseModel = {
   find: () => {
     return {
       select: jest.fn(() => {
@@ -87,6 +87,9 @@ export const mockModelMongoose = {
   ),
   findByIdAndUpdate: () => {
     return { exec: jest.fn(() => null) };
+  },
+  updateOne: () => {
+    return jest.fn(() => null);
   }
 };
 

@@ -1,5 +1,5 @@
 import { mockStockHistoryRepository } from './../../../../../mock/repository/repository.mock';
-import { StockHistoryMongooseRepository } from './../../../../../../src/microservice/adapter/repository/history.repository';
+import { StockHistoryMongooseRepository } from '../../../../../../src/microservice/adapter/repository/stock-history.repository';
 import { mockStock } from '../../../../../mock/model/stock.mock';
 import { LogHistoryService } from '../../../../../../src/microservice/domain/service/stock/log-history.service';
 import { Test, TestingModule } from '@nestjs/testing';
