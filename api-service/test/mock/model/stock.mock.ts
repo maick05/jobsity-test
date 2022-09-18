@@ -14,3 +14,33 @@ export const mockStock = () => {
 
   return stock;
 };
+
+export const mockMappedStock = () => {
+  return {
+    close: 101,
+    date: 'any_date',
+    high: 111,
+    low: 90,
+    name: 'any_name',
+    open: 100,
+    symbol: 'any_symbol',
+    time: 'any_time',
+    volume: 190
+  };
+};
+
+export const mockStockResponse = () => {
+  return [
+    {
+      close: 101,
+      date: 'any_date',
+      high: 111,
+      low: 90,
+      name: 'any_name',
+      open: 100,
+      symbol: 'any_symbol',
+      time: 'any_time',
+      volume: 190
+    }
+  ];
+};

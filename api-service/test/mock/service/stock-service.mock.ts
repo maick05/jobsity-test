@@ -24,6 +24,8 @@ export const mockGetStatsService = {
   }
 };
 
-export const mockHttpService = {
-  get: jest.fn(() => of(null))
+export const mockHttpService = (response) => {
+  return {
+    get: jest.fn(() => of(response))
+  };
 };
