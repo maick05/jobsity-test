@@ -37,7 +37,7 @@ export const mockGeneratePasswordService = {
   }
 };
 
-export const jwtService = {
+export const mockJwtService = {
   sign: () => {
     return;
   }

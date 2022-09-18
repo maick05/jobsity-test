@@ -73,10 +73,7 @@
     "coverageDirectory": "coverage",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/src/main.ts",
-      "/src/app.module.ts",
-      "/src/config/database",
-      "/src/core/auth/jwt/"
+      "/src/main.ts"
     ],
     "testEnvironment": "node"
   }

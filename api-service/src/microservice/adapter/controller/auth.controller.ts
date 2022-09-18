@@ -40,6 +40,7 @@ export class AuthController {
   async register(@Body() user: CreateUserDTO) {
     return this.registerUserService.register(user);
   }
+
   @ApiBasicAuth()
   @ApiOkResponse({
     description: 'User authenticated, token generated!',

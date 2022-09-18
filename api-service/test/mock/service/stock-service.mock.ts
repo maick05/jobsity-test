@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 
-export const mockStockService = {
+export const mockGetStockService = {
   getStock: () => {
     return;
   }
