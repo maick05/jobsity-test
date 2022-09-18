@@ -1,6 +1,6 @@
+import { mockExpectedStats } from './../../../../mock/model/stat.mock';
 import { mockConfigService } from './../../../../mock/service/config-service.mock';
 import { JwtService } from '@nestjs/jwt';
-import { mockStats } from './../../../../mock/model/stat.mock';
 import { mockHistoryStockArray } from './../../../../mock/model/history.mock';
 import { mockStock } from './../../../../mock/model/stock.mock';
 import { GetStatsService } from './../../../../../src/microservice/domain/service/stock/get-stats.service';
@@ -83,11 +83,11 @@ describe('StockController', () => {
     it('Should call getStats and return a json response', async () => {
       const serviceStub = sinon
         .stub(mockGetStatsService, 'getStats')
-        .returns(mockStats());
+        .returns(mockExpectedStats());
 
       const actual = await sut.getStats();
 
-      expect(actual).to.be.deep.equal(mockStats());
+      expect(actual).to.be.deep.equal(mockExpectedStats());
 
       serviceStub.restore();
     });

@@ -1,11 +1,7 @@
 import { HttpException } from '@nestjs/common';
 
 export class CustomErrorException extends HttpException {
-  constructor(
-    public message: string,
-    status: number,
-    public errCode: number = -1
-  ) {
+  constructor(public message: string, status: number, public errCode: number) {
     super(message, status);
   }
 

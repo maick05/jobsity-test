@@ -117,4 +117,20 @@ describe('GetStockService', () => {
       logSpy.restore();
     });
   });
+
+  describe('get', () => {
+    it('Should call get and throws an error', async () => {
+      const getStockStub = sinon
+        .stub(mockHttpClientService, 'get')
+        .throws(new Error('any error'));
+
+      try {
+        await sut.get('any');
+      } catch (err) {
+        expect(err.message).to.be.deep.equal('any error');
+      }
+
+      getStockStub.restore();
+    });
+  });
 });

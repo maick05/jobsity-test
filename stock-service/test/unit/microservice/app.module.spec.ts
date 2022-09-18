@@ -1,9 +1,9 @@
-import { AppModule } from './../../../../../src/microservice/adapter/module/app.module';
+import { AppModule } from '../../../src/microservice/adapter/module/app.module';
 import { Test, TestingModule } from '@nestjs/testing';
-import { StockController } from '../../../../../src/microservice/adapter/controller/stock.controller';
-import { Stock } from '../../../../../src/microservice/domain/model/stock.model';
-import { GetStockService } from '../../../../../src/microservice/domain/service/get-stock.service';
-import { mockGetStock } from '../../../../mock/service.mock';
+import { StockController } from '../../../src/microservice/adapter/controller/stock.controller';
+import { Stock } from '../../../src/microservice/domain/model/stock.model';
+import { GetStockService } from '../../../src/microservice/domain/service/get-stock.service';
+import { mockGetStock } from '../../mock/service.mock';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 

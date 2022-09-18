@@ -30,7 +30,11 @@ export abstract class HttpClientService extends AbstractService {
       );
       return response;
     } catch (err) {
-      throw new CustomErrorException(err.message, HttpStatus.BAD_REQUEST);
+      throw new CustomErrorException(
+        err.message,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }

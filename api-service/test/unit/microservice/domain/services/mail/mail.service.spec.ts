@@ -3,7 +3,6 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { MailService } from './../../../../../../src/microservice/domain/service/mail/mail.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as sinon from 'sinon';
-import { expect } from 'chai';
 
 describe('MailService', () => {
   let sut: MailService;
@@ -26,14 +25,11 @@ describe('MailService', () => {
     it('Should call sendEmail and call sendMail correctly', async () => {
       const mailSpy = sinon.spy(mockMailerService, 'sendMail');
 
-      const actual = await sut.sendEmail(
-        'any_email',
-        'any_subject',
-        'any_template',
-        { password: 'any_pass' }
-      );
+      await sut.sendEmail('any_email', 'any_subject', 'any_template', {
+        password: 'any_pass'
+      });
 
-      expect(actual).to.be.deep.equal({
+      sinon.assert.calledOnceWithExactly(mailSpy, {
         to: 'any_email',
         subject: 'any_subject',
         template: 'any_template',

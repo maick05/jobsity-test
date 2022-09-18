@@ -133,4 +133,30 @@ describe('StockHistoryMongooseRepository', () => {
       groupStub.restore();
     });
   });
+
+  describe('groupBy', () => {
+    it('Should call groupBy and return a stats array', async () => {
+      const aggStub = sinon
+        .stub(mockMongooseModel, 'aggregate')
+        .returns(mockAgregatedStats());
+
+      const actual = await sut.groupBy({ any: 1 }, { any: 1 });
+
+      expect(actual).to.be.deep.equal(mockAgregatedStats());
+
+      aggStub.restore();
+    });
+
+    it('Should call groupBy and return a stats array with empty match', async () => {
+      const aggStub = sinon
+        .stub(mockMongooseModel, 'aggregate')
+        .returns(mockAgregatedStats());
+
+      const actual = await sut.groupBy({ any: 1 });
+
+      expect(actual).to.be.deep.equal(mockAgregatedStats());
+
+      aggStub.restore();
+    });
+  });
 });
