@@ -42,8 +42,6 @@ export class CustomJwtAuthGuard extends AbstractGuard {
     const role = this.reflector.get<string>('role', context.getHandler());
 
     if (!role || tokenPayload.role === EnumUserRole.ADMIN) return true;
-    console.log(tokenPayload.role);
-    console.log(role);
     if (role !== tokenPayload.role) {
       throw new ForbiddenException(
         `Forbidden Resource, only the ${role} can do it.`

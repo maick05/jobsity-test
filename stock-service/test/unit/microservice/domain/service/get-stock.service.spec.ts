@@ -44,7 +44,6 @@ describe('GetStockService', () => {
       try {
         await sut.getStock('any_stock');
       } catch (err) {
-        console.log(err);
         expect(err.message).to.be.deep.equal('any error');
         expect(err.name).to.be.deep.equal('HttpException');
       }
