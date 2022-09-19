@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  stockApiStooq:
+    volumes:
+      - ./stock-service/:/var/www/
+    image: node:16
+    build:
+      dockerfile: ./Dockerfile
+      context: ./stock-service
+    container_name: stock-container
+    ports:
+      - "3002:3002"
+      - "3001:3001"
+    # command: bash -c "npm install && npm run start"
+    networks:
+      jobsityNetwork:
+        ipv4_address: 192.128.1.12
+
+  apiStock:
+    volumes:
+      - ./api-service/:/var/www/
+    image: node:16
+    build:
+      dockerfile: ./Dockerfile
+      context: ./api-service
+    container_name: api-container
+    # command: bash -c "npm install && npm run start"
+    network_mode: service:stockApiStooq
+
+networks:
+  jobsityNetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.128.0.0/16
+          gateway: 192.128.0.1

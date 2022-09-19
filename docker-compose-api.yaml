@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+
+  apiMicroservice:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./api-service
+    volumes:
+      - ./api-service/:/var/www/api-service
+    image: node:latest
+    container_name: api-microservice
+    ports:
+      - "3001:3001"
+    networks:
+      jobsityNetwork:
+        ipv4_address: 192.128.1.3
+
+networks:
+  jobsityNetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.128.0.0/16
+          gateway: 192.128.0.1
