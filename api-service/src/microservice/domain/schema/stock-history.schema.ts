@@ -46,6 +46,7 @@ export class StockHistory {
     description: `Highest day value`,
     example: 111.07
   })
+  @Prop({ required: true, type: Number })
   high: number;
 
   @ApiProperty({
@@ -53,6 +54,7 @@ export class StockHistory {
     description: `Lowest day value`,
     example: 101.07
   })
+  @Prop({ required: true, type: Number })
   low: number;
 
   @ApiProperty({
@@ -60,6 +62,7 @@ export class StockHistory {
     description: `Close/Last day value`,
     example: 105.07
   })
+  @Prop({ required: true, type: Number })
   close: number;
 }
 

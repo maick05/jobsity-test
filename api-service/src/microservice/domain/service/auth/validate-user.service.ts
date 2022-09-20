@@ -4,7 +4,7 @@ import { UserAlreadyExistsException } from '../../../../core/error-handling/exce
 import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
 import { User } from '../../schema/user.schema';
 import { CreateUserDTO } from '../../model/dto/create-user.dto';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { AbstractAuthService } from './abstract-auth.service';
 import { LoginUserDTO } from '../../model/dto/login-user.dto';
 
@@ -38,7 +38,7 @@ export class ValidateUserService extends AbstractAuthService {
 
   async validateIfUserExistsDB(email: string): Promise<User> {
     const res = await this.getUserByEmail(email);
-    if (!res) throw new NotFoundException(`User with '${email}'`);
+    if (!res) throw new NotFoundException(`User with email '${email}'`);
     return res;
   }
 }

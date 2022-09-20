@@ -5,7 +5,7 @@ import { UsersMongooseRepository } from '../../../../../../src/microservice/adap
 import { Test, TestingModule } from '@nestjs/testing';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 describe('GeneratePasswordService', () => {
   let sut: GeneratePasswordService;

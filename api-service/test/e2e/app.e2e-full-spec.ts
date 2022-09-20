@@ -45,7 +45,8 @@ describe('App (e2e) ', () => {
         it('/stock?q=:stock (GET)', async () => {
           const actual1 = await supertest(app.getHttpServer())
             .get('/stock?q=googl.us')
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`)
+            .expect(200);
           expect(actual1.body).to.be.an('object');
         });
       });

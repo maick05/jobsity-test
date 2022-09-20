@@ -8,7 +8,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { CreateUserDTO } from '../../../../../../src/microservice/domain/model/dto/create-user.dto';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 describe('ValidateUserService', () => {
   let sut: ValidateUserService;
@@ -136,7 +136,9 @@ describe('ValidateUserService', () => {
       try {
         await sut.validateIfUserExistsDB('any_email');
       } catch (err) {
-        expect(err.message).to.be.deep.equal(`User with 'any_email' not found`);
+        expect(err.message).to.be.deep.equal(
+          `User with email 'any_email' not found`
+        );
       }
 
       getStub.restore();

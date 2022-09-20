@@ -5,4 +5,8 @@ export class InvalidAuthenticationException extends CustomErrorException {
   constructor(message: string) {
     super(message, HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
   }
+
+  getStatus() {
+    return HttpStatus.UNAUTHORIZED;
+  }
 }

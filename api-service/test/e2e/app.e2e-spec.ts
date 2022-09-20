@@ -48,7 +48,8 @@ describe('App (e2e) ', () => {
         it('/stats (GET)', async () => {
           const actual1 = await supertest(app.getHttpServer())
             .get('/stats')
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`)
+            .expect(200);
           expect(actual1.body).to.be.an('array').that.is.not.empty;
         });
       });
@@ -57,7 +58,8 @@ describe('App (e2e) ', () => {
         it('/history (GET)', async () => {
           const actual1 = await supertest(app.getHttpServer())
             .get('/stats')
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`)
+            .expect(200);
           expect(actual1.body).to.be.an('array').that.is.not.empty;
         });
       });
@@ -75,7 +77,8 @@ describe('App (e2e) ', () => {
             .send({
               email: `any_user_test_${randomUser}@test.com`,
               role: EnumUserRole.USER
-            });
+            })
+            .expect(201);
           expect(actual.body.password !== undefined).to.be.equal(true);
         });
       });

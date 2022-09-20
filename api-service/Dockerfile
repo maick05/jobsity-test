@@ -8,6 +8,9 @@ COPY ./ ./
 WORKDIR /var/www/api-service 
 # install
 RUN npm install
+#Solve lf header problem reinstaling bcrypt
+RUN npm uninstall bcryptjs
+RUN npm i bcryptjs
 # start
 ENTRYPOINT npm run start
 # port

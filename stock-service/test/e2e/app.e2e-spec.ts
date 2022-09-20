@@ -29,7 +29,7 @@ describe('StockController (e2e) ', () => {
 
   describe('Stock (e2e) ', () => {
     it('/stock/:stock (GET)', async () => {
-      const actual = await supertest(app.getHttpServer()).get('/stock/amzn.us');
+      const actual = await supertest(app.getHttpServer()).get('/stock/amzn.us').expect(200);
       expect(actual.body).to.be.an('array').that.is.not.empty;
     });
   });

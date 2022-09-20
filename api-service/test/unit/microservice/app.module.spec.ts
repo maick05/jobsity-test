@@ -1,3 +1,6 @@
+import { User } from './../../../src/microservice/domain/schema/user.schema';
+import { mockMongooseModel } from './../../mock/repository/mongoose-repository.mock';
+import { StockHistory } from './../../../src/microservice/domain/schema/stock-history.schema';
 import { StockHistoryMongooseRepository } from './../../../src/microservice/adapter/repository/stock-history.repository';
 import {
   mockUserRepository,
@@ -38,8 +41,9 @@ import { Stock } from '../../../src/microservice/domain/model/stock.model';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { AppModule } from './../../../src/microservice/app.module';
+import { getModelToken } from '@nestjs/mongoose';
 
-jest.setTimeout(10000);
+jest.setTimeout(50000);
 
 describe('AppModule', () => {
   let stockController: StockController;
@@ -74,6 +78,10 @@ describe('AppModule', () => {
       .useValue(mockUserRepository)
       .overrideProvider(StockHistoryMongooseRepository)
       .useValue(mockStockHistoryRepository)
+      .overrideProvider(getModelToken(User.name))
+      .useValue(mockMongooseModel)
+      .overrideProvider(getModelToken(StockHistory.name))
+      .useValue(mockMongooseModel)
       .overrideGuard(LocalAuthGuard)
       .useValue(mockGuard)
       .overrideGuard(CustomJwtAuthGuard)

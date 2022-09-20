@@ -1,6 +1,6 @@
 import { RandomHelper } from '../../../adapter/helper/random.helper';
 import { UsersMongooseRepository } from '../../../adapter/repository/user.repository';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { Injectable } from '@nestjs/common';
 import { EnumBufferEncoding } from '../../enum/buffer-encoding.enum';
 import { AbstractAuthService } from './abstract-auth.service';
